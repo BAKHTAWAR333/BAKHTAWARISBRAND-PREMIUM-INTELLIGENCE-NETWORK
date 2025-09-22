@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bk SIM DATABASE</title>
+    <title>MRISBRAND SIM DATABASE</title>
     <meta name="description" content="Premium Intelligence Network">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap');
         
         :root {
             --primary: #0ff;
             --secondary: #00f;
             --accent: #3ea7ff;
+            --accent2: #ff00ff;
+            --accent3: #ff6b00;
             --dark: #0a0a1a;
             --darker: #050510;
             --text: #e0e0ff;
+            --matrix: #00ff00;
         }
         
         * {
@@ -26,15 +29,16 @@
         }
         
         body {
-            font-family: 'Share Tech Mono', monospace;
+            font-family: 'Rajdhani', sans-serif;
             background: var(--darker);
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(0, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 30% 60%, rgba(255, 0, 255, 0.03) 0%, transparent 30%),
                 linear-gradient(to bottom, var(--darker), var(--dark));
             color: var(--text);
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
             overflow-x: hidden;
             position: relative;
         }
@@ -58,88 +62,151 @@
             z-index: -1;
         }
         
+        .cyberpunk-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 80%, rgba(0, 255, 255, 0.03) 90%),
+                        linear-gradient(90deg, rgba(255, 0, 255, 0.03), rgba(0, 255, 255, 0.03));
+            background-size: 100% 6px, 6px 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+        }
+        
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.1;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
+        .cyber-border {
+            position: relative;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 15px var(--primary), 
+                        inset 0 0 15px var(--primary);
+            padding: 3px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .cyber-border::before, .cyber-border::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+        
+        .cyber-border::before {
+            top: -5px;
+            left: -5px;
+        }
+        
+        .cyber-border::after {
+            bottom: -5px;
+            right: -5px;
+        }
+        
         .header {
             text-align: center;
             margin-bottom: 40px;
             position: relative;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 30px 0;
+            background: rgba(5, 5, 16, 0.7);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
         
-        .brand-title {
+        .cyber-glitch {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(28px, 8vw, 60px);
+            font-size: clamp(32px, 10vw, 70px);
             color: var(--primary);
-            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--secondary);
-            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--primary), 
+                         0 0 20px var(--primary), 
+                         0 0 40px var(--secondary),
+                         2px 2px 0 var(--accent2),
+                         -2px -2px 0 var(--accent3);
+            letter-spacing: 3px;
             margin-bottom: 10px;
             position: relative;
             display: inline-block;
+            animation: glitch 5s infinite;
         }
         
-        .brand-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            5% { transform: translate(-2px, 2px); }
+            10% { transform: translate(2px, -2px); }
+            15% { transform: translate(-2px, -2px); }
+            20% { transform: translate(2px, 2px); }
+            50% { transform: translate(0); }
         }
         
         .subtitle {
-            font-size: 1rem;
-            letter-spacing: 3px;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
             color: var(--primary);
             text-shadow: 0 0 5px var(--primary);
             text-transform: uppercase;
             margin-top: 15px;
+            font-family: 'Share Tech Mono', monospace;
         }
         
-        .verify-badge {
+        .security-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.5);
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
             border: 1px solid var(--accent);
-            border-radius: 20px;
-            padding: 5px 15px;
-            margin-top: 15px;
-            font-size: 0.9rem;
+            border-radius: 25px;
+            padding: 8px 20px;
+            margin-top: 20px;
+            font-size: 1rem;
             color: var(--accent);
+            text-shadow: 0 0 5px var(--accent);
+            animation: pulse 2s infinite;
         }
         
-        .verify-badge svg {
-            width: 16px;
-            height: 16px;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px var(--accent); }
+            50% { box-shadow: 0 0 15px var(--accent); }
+            100% { box-shadow: 0 0 5px var(--accent); }
         }
         
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
             margin-bottom: 40px;
         }
         
-        .card {
+        .cyber-card {
             background: rgba(10, 10, 26, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             border-radius: 10px;
             padding: 25px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .card::before {
+        .cyber-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -150,26 +217,27 @@
             pointer-events: none;
         }
         
-        .card:hover {
+        .cyber-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
-            border-color: rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            border-color: rgba(0, 255, 255, 0.5);
         }
         
-        .card h2 {
+        .cyber-card h2 {
             color: var(--primary);
             margin-bottom: 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             text-shadow: 0 0 5px var(--primary);
             position: relative;
             display: inline-block;
+            padding-bottom: 10px;
         }
         
-        .card h2::after {
+        .cyber-card h2::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: 0;
             left: 0;
             width: 40px;
             height: 2px;
@@ -177,45 +245,54 @@
             box-shadow: 0 0 5px var(--primary);
         }
         
-        .card p, .card li {
+        .cyber-card p, .cyber-card li {
             color: var(--text);
             opacity: 0.9;
             line-height: 1.6;
+            font-size: 1.1rem;
         }
         
-        .card ul {
+        .cyber-card ul {
             list-style: none;
         }
         
-        .card ul li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        .cyber-card ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            transition: all 0.3s ease;
         }
         
-        .card ul li:last-child {
+        .cyber-card ul li:hover {
+            background: rgba(0, 255, 255, 0.05);
+            padding-left: 10px;
+        }
+        
+        .cyber-card ul li:last-child {
             border-bottom: none;
         }
         
-        .card ul li i {
+        .cyber-card ul li i {
             color: var(--primary);
-            width: 20px;
+            width: 25px;
             text-shadow: 0 0 5px var(--primary);
+            font-size: 1.2rem;
         }
         
-        .form-container {
+        .terminal {
             background: rgba(10, 10, 26, 0.9);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             border-radius: 10px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
             position: relative;
+            overflow: hidden;
         }
         
-        .form-container::before {
+        .terminal::before {
             content: '';
             position: absolute;
             top: 0;
@@ -225,18 +302,40 @@
             background: linear-gradient(90deg, transparent, var(--primary), transparent);
         }
         
-        .form-title {
-            text-align: center;
-            color: var(--primary);
+        .terminal-header {
+            display: flex;
+            align-items: center;
             margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .terminal-title {
+            color: var(--primary);
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             text-shadow: 0 0 5px var(--primary);
+            flex-grow: 1;
         }
+        
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .terminal-btn {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        
+        .terminal-btn.close { background: #ff5f56; }
+        .terminal-btn.minimize { background: #ffbd2e; }
+        .terminal-btn.maximize { background: #27c93f; }
         
         .form {
             display: grid;
-            gap: 20px;
+            gap: 25px;
         }
         
         .input-wrap {
@@ -245,23 +344,24 @@
         
         .input-wrap i {
             position: absolute;
-            left: 15px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary);
             text-shadow: 0 0 5px var(--primary);
             z-index: 1;
+            font-size: 1.2rem;
         }
         
         input#phone {
             width: 100%;
-            padding: 16px 20px 16px 50px;
+            padding: 18px 25px 18px 60px;
             border-radius: 8px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             color: var(--primary);
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1rem;
+            font-size: 1.1rem;
             position: relative;
             transition: all 0.3s ease;
         }
@@ -269,65 +369,98 @@
         input#phone:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.8);
         }
         
         input#phone::placeholder {
             color: rgba(0, 255, 255, 0.6);
+            font-style: italic;
         }
         
-        .btn {
-            padding: 16px;
+        .cyber-btn {
+            padding: 18px;
             border: 1px solid var(--primary);
             border-radius: 8px;
             background: rgba(0, 0, 0, 0.7);
             color: var(--primary);
             font-family: 'Orbitron', sans-serif;
             font-weight: bold;
+            font-size: 1.1rem;
             cursor: pointer;
             text-transform: uppercase;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            letter-spacing: 1px;
+            gap: 12px;
+            letter-spacing: 2px;
             text-shadow: 0 0 5px var(--primary);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .btn:hover {
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .cyber-btn:hover {
             background: var(--primary);
             color: black;
-            box-shadow: 0 0 20px var(--primary);
+            box-shadow: 0 0 30px var(--primary);
         }
         
         .contact-buttons {
             display: grid;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 25px;
         }
         
-        .contact-buttons .btn {
+        .contact-buttons .cyber-btn {
             text-decoration: none;
         }
         
         #result {
-            margin-top: 30px;
+            margin-top: 35px;
         }
         
         .result-box {
             background: rgba(0, 10, 20, 0.8);
-            border: 1px solid rgba(62, 167, 255, 0.3);
+            border: 1px solid rgba(62, 167, 255, 0.4);
             border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 0 10px rgba(62, 167, 255, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 0 15px rgba(62, 167, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
         }
         
         .result-box .row {
-            margin: 10px 0;
+            margin: 12px 0;
             display: flex;
             flex-wrap: wrap;
         }
@@ -335,96 +468,63 @@
         .result-box .label {
             font-weight: bold;
             color: var(--accent);
-            margin-right: 10px;
-            min-width: 150px;
+            margin-right: 15px;
+            min-width: 180px;
             text-shadow: 0 0 5px var(--accent);
+            font-family: 'Share Tech Mono', monospace;
         }
         
         .result-box .value {
             color: #fff;
             word-break: break-all;
+            font-size: 1.1rem;
         }
         
         .msg {
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
-            margin: 15px 0;
+            margin: 20px 0;
             text-align: center;
             font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
         }
         
         .msg.loading {
             background: rgba(62, 167, 255, 0.1);
-            border: 1px dashed rgba(62, 167, 255, 0.3);
+            border: 1px dashed rgba(62, 167, 255, 0.4);
             color: var(--accent);
         }
         
         .msg.error {
             background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
+            border: 1px solid rgba(255, 0, 0, 0.4);
             color: #ff6b6b;
         }
         
         .footer {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
             color: var(--text);
-            opacity: 0.7;
-            font-size: 0.9rem;
+            opacity: 0.8;
+            font-size: 1rem;
         }
         
         .footer p {
-            margin: 5px 0;
+            margin: 8px 0;
+            font-family: 'Share Tech Mono', monospace;
         }
         
-        .terminal-effect {
+        .hacking-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999;
-            background: linear-gradient(transparent 90%, rgba(0, 255, 255, 0.05) 90%);
-            background-size: 100% 4px;
-            opacity: 0.1;
-            animation: scan 10s linear infinite;
-        }
-        
-        @keyframes scan {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
-        }
-        
-        .glow-effect {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            opacity: 0.03;
-            filter: blur(40px);
-            z-index: -1;
-            animation: float 15s infinite ease-in-out;
-        }
-        
-        .glow-effect:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .glow-effect:nth-child(2) {
-            top: 60%;
-            right: 10%;
-            animation-delay: -5s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20px, 20px) scale(1.2); }
+            z-index: 9998;
+            opacity: 0.05;
         }
         
         @media (max-width: 768px) {
@@ -433,14 +533,14 @@
             }
             
             .container {
-                padding: 10px;
+                padding: 15px;
             }
             
-            .card {
+            .cyber-card {
                 padding: 20px;
             }
             
-            .form-container {
+            .terminal {
                 padding: 20px;
             }
             
@@ -450,74 +550,99 @@
             
             .result-box .label {
                 min-width: auto;
-                margin-bottom: 5px;
+                margin-bottom: 8px;
+            }
+            
+            input#phone {
+                padding: 15px 20px 15px 50px;
             }
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
+        .cyber-loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 255, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
         }
     </style>
 </head>
 <body>
-    <div class="terminal-effect"></div>
-    <div class="glow-effect"></div>
-    <div class="glow-effect"></div>
+    <div class="cyberpunk-overlay"></div>
+    <div class="matrix-rain"></div>
+    <div class="hacking-animation"></div>
     
     <div class="container">
         <header class="header">
-            <h1 class="brand-title">BkISBRAND</h1>
+            <h1 class="cyber-glitch">BkISBRAND</h1>
             <div class="subtitle">PREMIUM INTELLIGENCE NETWORK</div>
-            <div class="verify-badge">
-                <svg viewBox="0 0 512 512" aria-hidden="true">
-                    <defs>
-                        <linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#3ea7ff"/>
-                            <stop offset="100%" stop-color="#9bd4ff"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M256 24l54.2 38.4 65.5-6.5 24.7 61 61 24.7-6.5 65.5L512 256l-57.1 48.9 
-                             6.5 65.5-61 24.7-24.7 61-65.5-6.5L256 488l-54.2-38.4-65.5 6.5-24.7-61-61-24.7 
-                             6.5-65.5L0 256l57.1-48.9-6.5-65.5 61-24.7 24.7-61 65.5 6.5L256 24z" fill="url(#gradBlue)"/>
-                    <path d="M226 314l-56-56 34-34 22 22 86-86 34 34-120 120z" fill="#fff"/>
-                </svg>
-                SECURE DATABASE ACCESS
+            <div class="security-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                SECURE DATABASE ACCESS - v5.0.0
             </div>
         </header>
         
-        <div class="form-container">
-            <h2 class="form-title">SIM DATABASE QUERY</h2>
-            <form id="form" class="form" autocomplete="off">
-                <div class="input-wrap">
-                    <i class="fa-solid fa-mobile-screen"></i>
-                    <input id="phone" inputmode="numeric" placeholder="ENTER PHONE NUMBER (E.G. 3299073374)" maxlength="13">
+        <div class="cyber-border">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-title">SIM DATABASE QUERY SYSTEM</div>
+                    <div class="terminal-controls">
+                 
+                    </div>
                 </div>
-                <p class="input-guidance"></p>
-                <button class="btn pulse" type="submit">
-                    <i class="fa-solid fa-satellite-dish"></i> INITIATE SEQUENCE
-                </button>
                 
+                <form id="form" class="form" autocomplete="off">
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <input id="phone" inputmode="numeric" placeholder="ENTER TARGET PHONE NUMBER (E.G. 3299073374)" maxlength="13">
+                    </div>
+                    <p class="input-guidance"></p>
+                    <button class="cyber-btn" type="submit">
+                        <i class="fa-solid fa-satellite-dish"></i> INITIATE SEQUENCE
+                    </button>
+                    
+                 
+                </form>
                 
-            </form>
-            
-            <div id="result"></div>
+                <div id="result"></div>
+            </div>
         </div>
         
         <div class="grid">
-            <section class="card">
-                <h2>ABOUT OUR ORGANIZATION</h2>
+            <section class="cyber-card">
+                <h2><i class="fa-solid fa-brain"></i> ABOUT OUR ORGANIZATION</h2>
                 <p>BAKHTAWARISBRAND WORLD IS A PREMIER CYBER INTELLIGENCE UNIT SPECIALIZING IN ADVANCED DATA ACQUISITION AND ANALYSIS. OUR NETWORK OPERATES AT THE FOREFRONT OF DIGITAL SECURITY RESEARCH.</p>
                 <p>WE PROVIDE SPECIALIZED TOOLS AND METHODOLOGIES FOR SECURE DATA VERIFICATION AND ANALYSIS.</p>
             </section>
             
-            <section class="card">
-                <h2>SERVICES RENDERED</h2>
+            <section class="cyber-card">
+                <h2><i class="fa-solid fa-server"></i> SERVICES RENDERED</h2>
                 <ul class="feature-list">
                     <li><i class="fa-solid fa-shield-halved"></i> CNIC / SIM VERIFICATION</li>
                     <li><i class="fa-solid fa-database"></i> FAKE SIMS + PASSPORT DETAILS & LIVE LOCATION</li>
@@ -529,7 +654,7 @@
         
         <footer class="footer">
             <p>© 2025 BAKHTAWARISBRAND INTELLIGENCE NETWORK | ALL RIGHTS RESERVED</p>
-            <p>v5.0.0 | OPERATION SPECTRE</p>
+            <p>OPERATION SPECTRE | ENCRYPTED CONNECTION</p>
         </footer>
     </div>
 
@@ -549,7 +674,7 @@
 
         async function fetchData(num) {
             try {
-                show('<div class="msg loading"><i class="fas fa-circle-notch fa-spin"></i><p>ACCESSING SECURE DATABASES...</p></div>');
+                show('<div class="msg loading"><div class="cyber-loader"></div><p>ACCESSING SECURE DATABASES...</p></div>');
                 const url = `https://www.3patticenter.com/famofc/api/database.php?num=${encodeURIComponent(num)}`;
 
                 const res = await fetch(url, { method: 'GET' });
@@ -570,7 +695,13 @@
                 } else {
                     const nf = `
                         <div class="msg error">
-                           
+                            <i class="fas fa-triangle-exclamation" style="font-size:1.4em;display:block;margin-bottom:8px"></i>
+                            <p><strong>DATA NOT FOUND IN PUBLIC DATABASE</strong></p>
+                            <p>For guaranteed results, a <strong>PREMIUM SEARCH</strong> is available for PKR 500.</p>
+                            <p>Please contact us to proceed.</p>
+                            <a class="cyber-btn" style="margin-top:10px;text-decoration:none;display:inline-block" target="_blank" href="https://wa.me/9232990xxxx4?text=${encodeURIComponent('Hello MRISBRAND SIM DATABASE Admin, I need premium search for number: ' + num)}">
+                                <i class="fab fa-whatsapp"></i> REQUEST PREMIUM ACCESS
+                            </a>
                         </div>
                     `;
                     show(nf);
@@ -586,13 +717,59 @@
             const num = document.getElementById('phone').value.trim();
             const valid = /^(?:\+?92)?3\d{9}$|^3\d{9}$/.test(num);
             if (!valid) {
-                show('<div class="msg error">INVALID NUMBER FORMAT. PLEASE ENTER 10 DIGITS WITHOUT 0, LIKE 3200276941.</div>');
+                show('<div class="msg error">INVALID NUMBER FORMAT. PLEASE ENTER 10 DIGITS WITHOUT 0, LIKE 3299073374.</div>');
                 return;
             }
             fetchData(num);
             if (window.__openAd) window.__openAd();
         });
     })();
+    
+    // Create Matrix rain effect
+    function createMatrixRain() {
+        const canvas = document.createElement('canvas');
+        canvas.className = 'matrix-rain';
+        document.body.appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&!*';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+        
+        function draw() {
+            ctx.fillStyle = 'rgba(5, 5, 16, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(draw, 33);
+    }
+    
+    // Initialize effects when page loads
+    window.addEventListener('load', function() {
+        createMatrixRain();
+    });
     </script>
     
 </body>
